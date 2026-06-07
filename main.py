@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from routers import base
 from routers import data
-from motor.motor_asyncio import AsyncIOMotorClient
 from helper.config import get_settings
+from motor.motor_asyncio import AsyncIOMotorClient
+from stores.llm.LLMProviderFactory import LLMProviderFactory
 
 app = FastAPI()
 @app.on_event('startup')
@@ -10,7 +11,26 @@ async def startup_db_client():
     settings=get_settings()
     app.mongo_conn=AsyncIOMotorClient(settings.MONGO_URL)
     app.db_client=app.mongo_conn[settings.MONGODB_DATABASE]
+    
+    llm_provider_factory=LLMProviderFactory(settings)
+    
+    #generation client
+    app.generation_client=llm_provider_factory.create(
+        provider=settings.GENERATION_BACKEND
+    )
 
+    app.generation_client.set_generation_model(
+        model_id=settings.GENERATION_MODEL_ID
+    )
+    
+    #embedding client
+    app.embedding_client=llm_provider_factory.create(
+        provider=settings.EMBEDDING_BACKEND
+    )
+
+    app.embedding_client.set_embedding_model=llm_provider_factory.create(
+        settings.EMBEDDING_MODEL_ID
+    )
 
 @app.on_event('shutdown')
 async def shutdown_db_client():

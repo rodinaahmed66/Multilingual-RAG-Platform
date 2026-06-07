@@ -1,13 +1,31 @@
 from pydantic_settings import BaseSettings,SettingsConfigDict
 
 class settings(BaseSettings):
-    app_name: str
-    app_version:str
-    file_allowed_types:list
-    file_max_size:int
-    file_default_chunk_size:int
+    APP_NAME: str
+    APP_VERSION:str
+
+    FILE_ALLOWED_TYPES:list
+    FILE_MAX_SIZE:int
+    FILE_DEFAULT_CHUNK_SIZE:int
+
     MONGO_URL:str
     MONGODB_DATABASE:str
+
+    GENERATION_BACKEND:str
+    EMBEDDING_BACKEND:str
+
+    OPENAI_KEY:str=None
+    OPENAI_URL:str=None
+    COHERE_KEY:str=None
+
+    GENERATION_MODEL_ID:str=None
+    EMBEDDING_MODEL_ID:str=None
+    EMBEDDING_MODEL_SIZE:int=None
+
+    INPUT_DEFAULT_MAX_CHARACTERS:int=None
+    GENERATION_DEFAULT_MAX_TOKENS:int=None
+    GENERATION_DEFAULT_TEMPERATURE:float=None
+
     #class config: 
         #env_file=".env"
     model_config = SettingsConfigDict(env_file=".env")

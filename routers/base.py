@@ -7,8 +7,8 @@ base_router=APIRouter(prefix='/llms')
 async def welcome(app_setting:settings=Depends(get_settings)):
 
     
-    app_name=app_setting.app_name
-    app_version=app_setting.app_version
+    app_name=app_setting.APP_NAME
+    app_version=app_setting.APP_VERSION
 
     return {"app_name":app_name,
     "app_version":app_version}
