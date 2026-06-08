@@ -4,16 +4,21 @@ from routers import data
 from helper.config import get_settings
 from motor.motor_asyncio import AsyncIOMotorClient
 from stores.llm.LLMProviderFactory import LLMProviderFactory
+from stores.vectordb.VectorDBProviderFactory import VectorDBProviderFactory
+from routers import nlp
 
 app = FastAPI()
+
 @app.on_event('startup')
-async def startup_db_client():
+async def startup_span():
+
     settings=get_settings()
     app.mongo_conn=AsyncIOMotorClient(settings.MONGO_URL)
     app.db_client=app.mongo_conn[settings.MONGODB_DATABASE]
     
     llm_provider_factory=LLMProviderFactory(settings)
-    
+    vectordb_provider_factory=VectorDBProviderFactory(settings)
+
     #generation client
     app.generation_client=llm_provider_factory.create(
         provider=settings.GENERATION_BACKEND
@@ -31,12 +36,20 @@ async def startup_db_client():
     app.embedding_client.set_embedding_model=llm_provider_factory.create(
         settings.EMBEDDING_MODEL_ID
     )
+    
+    #vector db client
+    app.vectordb_client=vectordb_provider_factory.create(
+    provider=settings.Vectot_DB_BACKEND
+    )
+
+    app.vectordb_client.connect()
 
 @app.on_event('shutdown')
-async def shutdown_db_client():
-    app.mongo_conn.close()
+async def shutdown_span():
 
+    app.mongo_conn.close()
+    app.vectordb_client.disconnect()
     
 app.include_router(base.base_router)
 app.include_router(data.data_router)
-
+app.include_router(nlp.nlp_router)

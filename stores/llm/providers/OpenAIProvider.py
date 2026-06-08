@@ -45,7 +45,7 @@ class OpenAIProvider(LLMInterface):
                 return None
             
             max_output_tokens=max_output_tokens if max_output_tokens else self.default_generation_output_tokens
-            tempreture=tempreture if tempreture else self.default_generation_temperature
+            temperature=temperature if temperature else self.default_generation_temperature
             chat_history.append(
                  self.construct_prompt(prompt=prompt,
                      role=OpenAIEnums.USER.value
@@ -73,7 +73,7 @@ class OpenAIProvider(LLMInterface):
                 model=self.embedding_model_id,
                 input=text
             )
-            if not response or not response.data or len(response.data)==0 or response.data[0].embedding:
+            if not response or not response.data or len(response.data)==0 or not response.data[0].embedding:
                 self.logger.error("Error while embedding text with OpenAI")
                 return None
             return response.data[0].embedding

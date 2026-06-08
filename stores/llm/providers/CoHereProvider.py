@@ -42,7 +42,7 @@ class CoHereProvider(LLMInterface):
                 return None
             
             max_output_tokens=max_output_tokens if max_output_tokens else self.default_generation_output_tokens
-            tempreture=tempreture if tempreture else self.default_generation_temperature
+            temperature=temperature if temperature else self.default_generation_temperature
 
             response=self.client.chat(
                  model=self.generation_model_id,

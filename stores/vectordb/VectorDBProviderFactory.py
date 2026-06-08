@@ -6,7 +6,7 @@ class VectorDBProviderFactory:
 
     def __init__(self,config:dict):
         self.config=config
-        self.base_contrller=BaseController
+        self.base_contrller=BaseController()
 
 
     def create(self,provider:str):
