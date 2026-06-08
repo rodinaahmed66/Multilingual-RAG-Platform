@@ -25,6 +25,11 @@ class settings(BaseSettings):
     INPUT_DEFAULT_MAX_CHARACTERS:int=None
     GENERATION_DEFAULT_MAX_TOKENS:int=None
     GENERATION_DEFAULT_TEMPERATURE:float=None
+    
+
+    Vectot_DB_BACKEND:str
+    Vectot_DB_PATH:str
+    Vectot_DB_METHOD:str=None
 
     #class config: 
         #env_file=".env"
