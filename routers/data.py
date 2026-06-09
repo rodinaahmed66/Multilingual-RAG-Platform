@@ -41,7 +41,7 @@ async def upload_data(request:Request,project_id:str,file:UploadFile,
                    project_id=project_id)
         try:
             async with aiofiles.open(file_path, "wb") as f:
-                  while chunk := await file.read(app_settings.file_default_chunk_size):
+                  while chunk := await file.read(app_settings.FILE_DEFAULT_CHUNK_SIZE):
                        await f.write(chunk)
         except Exception as e:
 

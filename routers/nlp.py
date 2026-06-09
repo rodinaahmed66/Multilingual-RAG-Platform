@@ -26,7 +26,7 @@ async def index_project(request:Request,project_id:str,
         
         chunk_model=await ChunkModel.create_instance(db_client=request.app.db_client)
 
-        project=project_model.get_project_or_create_one(
+        project=await project_model.get_project_or_create_one(
                 project_id=project_id
         )
 

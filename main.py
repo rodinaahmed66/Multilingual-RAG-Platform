@@ -9,7 +9,7 @@ from routers import nlp
 
 app = FastAPI()
 
-@app.on_event('startup')
+#@app.on_event('startup')
 async def startup_span():
 
     settings=get_settings()
@@ -44,12 +44,17 @@ async def startup_span():
 
     app.vectordb_client.connect()
 
-@app.on_event('shutdown')
+#@app.on_event('shutdown')
 async def shutdown_span():
 
     app.mongo_conn.close()
     app.vectordb_client.disconnect()
     
+
+
+app.on_event("startup")(startup_span)
+app.on_event("shutdown")(shutdown_span)
+
 app.include_router(base.base_router)
 app.include_router(data.data_router)
 app.include_router(nlp.nlp_router)
