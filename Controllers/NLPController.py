@@ -39,9 +39,9 @@ class NLPController(BaseController):
         collection_info=self.vectordb_client.get_collection_info(
             collection_name=collection_name
         )
-
-        return json.loads(json.dump(collection_info,
-                                    default=lambda x:x.__dict__))
+        return json.loads(
+            json.dumps(collection_info, default=lambda x: x.__dict__)
+        )
     
     def index_into_vector_db(self,project:Project,
                              chunks:List[DataChunk],
@@ -88,7 +88,7 @@ class NLPController(BaseController):
         collection_name=self.create_collection_name(project_id=project.project_id)
 
         #step 2 get text embedding vector
-        vector=self.vectordb_client.embed_text(
+        vector=self.embedding_client.embed_text(
             text=text,
             document_type=DocumentTypeEnum.QUERY.value 
         )

@@ -121,7 +121,7 @@ async def get_project_index_info(request:Request,
 
 
 @nlp_router.post("/index/search/{project_id}")
-async def get_project_index_info(request:Request,
+async def search_index(request:Request,
                                  project_id:str,
                                  search_request:Search_Request):
        
