@@ -33,8 +33,10 @@ async def startup_span():
         provider=settings.EMBEDDING_BACKEND
     )
 
-    app.embedding_client.set_embedding_model=llm_provider_factory.create(
-        settings.EMBEDDING_MODEL_ID
+    app.embedding_client.set_embedding_model(
+         model_id=settings.EMBEDDING_MODEL_ID,
+         embedding_size=settings.EMBEDDING_MODEL_SIZE
+
     )
     
     #vector db client
