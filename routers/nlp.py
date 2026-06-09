@@ -41,7 +41,7 @@ async def index_project(request:Request,project_id:str,
         nlp_controller=NLPController(
             vectordb_client=request.app.vectordb_client,
             generation_client=request.app.generation_client,
-            embedding_client=request.appembedding_client
+            embedding_client=request.app.embedding_client
         )
 
         inserted_items_count=0
@@ -58,7 +58,7 @@ async def index_project(request:Request,project_id:str,
             if len(page_chunks):
                    page_no+=1
             
-            if not len(page_chunks) or page_chunks:
+            if not len(page_chunks) or len(page_chunks)==0:
                    page_no=False
                    break
             

@@ -57,7 +57,7 @@ class QdrantDBProvider(VectorDBInterface):
         if not self.is_collection_existed(collection_name):
             self.client.create_collection(
                 collection_name=collection_name,
-                vectors_config=models.VectorsParams(
+                vectors_config=models.VectorParams(
                     size=embedding_size,
                     distance=self.distance_method
                 )
