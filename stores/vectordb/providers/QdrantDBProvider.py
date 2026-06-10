@@ -68,7 +68,7 @@ class QdrantDBProvider(VectorDBInterface):
     
     def insert_one(self,collection_name:str,
                    text:str,
-                   vector:List,
+                   vector:list,
                    metadata:dict=None,
                    record_id:int=None):
                 
@@ -98,10 +98,10 @@ class QdrantDBProvider(VectorDBInterface):
         return True
 
     def insert_many(self,collection_name:str,
-                   texts:List,
-                   vectors:List,
-                   metadata:List=None,
-                   record_ids:List=None,
+                   texts:list,
+                   vectors:list,
+                   metadata:list=None,
+                   record_ids:list=None,
                    batch_size:int =50):
         
         if metadata is None:
@@ -140,9 +140,9 @@ class QdrantDBProvider(VectorDBInterface):
         
         return True 
 
-    def search_by_vector(self,vector:List,limit:int,
+    def search_by_vector(self,vector:list,limit:int,
                          collection_name:str):
-        
+
         return self.client.search(
           collection_name=collection_name,
           query_vector=vector,
