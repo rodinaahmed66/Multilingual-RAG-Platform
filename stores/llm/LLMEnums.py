@@ -4,6 +4,7 @@ from enum import Enum
 class LLMEnums(Enum):
     OPENAI="OPENAI"
     COHERE="COHERE"
+    GOOGLE="GOOGLE"
 
 class OpenAIEnums(Enum):
     SYSTEM="system"
@@ -18,6 +19,13 @@ class CoHereEnums(Enum):
     QUERY="search_query"
 
 
+class GoogleEnums(Enum):
+    SYSTEM="model"
+    USER="user"
+
+
 class DocumentTypeEnum(Enum):
     DOCUMENT="document"
     QUERY="query"
+
+

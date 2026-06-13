@@ -1,11 +1,13 @@
-from fastapi import FastAPI
+
 from routers import base
 from routers import data
+from routers import nlp
+from fastapi import FastAPI
 from helper.config import get_settings
 from motor.motor_asyncio import AsyncIOMotorClient
 from stores.llm.LLMProviderFactory import LLMProviderFactory
+from stores.llm.templates.template_parser import TemplateParser
 from stores.vectordb.VectorDBProviderFactory import VectorDBProviderFactory
-from routers import nlp
 
 app = FastAPI()
 
@@ -45,6 +47,12 @@ async def startup_span():
     )
 
     app.vectordb_client.connect()
+    
+    app.template_parser=TemplateParser(
+        language=settings.PRIMARY_LAN,
+        default_language=settings.DEFAULT_LAN
+    )
+
 
 #@app.on_event('shutdown')
 async def shutdown_span():

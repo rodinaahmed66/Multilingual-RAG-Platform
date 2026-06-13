@@ -17,7 +17,8 @@ class settings(BaseSettings):
     OPENAI_KEY:str=None
     OPENAI_URL:str=None
     COHERE_KEY:str=None
-
+    GOOGLE_KEY:str=None
+    
     GENERATION_MODEL_ID:str=None
     EMBEDDING_MODEL_ID:str=None
     EMBEDDING_MODEL_SIZE:int=None
@@ -30,7 +31,10 @@ class settings(BaseSettings):
     Vectot_DB_BACKEND:str
     Vectot_DB_PATH:str
     Vectot_DB_METHOD:str=None
-
+    
+    DEFAULT_LAN:str="en"
+    PRIMARY_LAN:str
+    
     #class config: 
         #env_file=".env"
     model_config = SettingsConfigDict(env_file=".env")

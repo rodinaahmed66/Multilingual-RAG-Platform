@@ -13,7 +13,7 @@ class LLMInterface (ABC):
         pass
 
     @abstractmethod
-    def generate_text(self,prompt:str,chat_histrory:list=[],max_output_tokens:int=None,
+    def generate_text(self,prompt:str,chat_history:list=[],max_output_tokens:int=None,
                       tempreture:float  =None):
         pass
     
