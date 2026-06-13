@@ -7,4 +7,4 @@ class PushRequest(BaseModel):
 
 class Search_Request(BaseModel):
     text:str
-    limit:Optional[int]=10
+    limit:Optional[int]=4

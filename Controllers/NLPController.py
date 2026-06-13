@@ -84,7 +84,7 @@ class NLPController(BaseController):
     
     def search_vector_db_collection(self,project:Project,
                                     text:str,
-                                    limit:int=10):
+                                    limit:int=4):
         
         #step1 get collection name
         collection_name=self.create_collection_name(project_id=project.project_id)
@@ -112,8 +112,9 @@ class NLPController(BaseController):
     
     def answer_rag_question(self,project:Project,
                                     query:str,
-                                    limit:int=10):
+                                    limit:int=4):
         
+        answer,full_prompt,chat_history=None,None,None
         #step 1 retrieve related documents
         retrieved_documents=self.search_vector_db_collection(
             project=project,
@@ -137,7 +138,9 @@ class NLPController(BaseController):
         for idx,doc in enumerate(retrieved_documents)
         ])
         
-        footer_prompt=self.template_parser.get("rag","footer_prompt")
+        footer_prompt=self.template_parser.get("rag",
+                                "footer_prompt",
+                                {"query":query})
         
         chat_history=[
             self.generation_client.construct_prompt(
