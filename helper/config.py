@@ -1,0 +1,43 @@
+from pydantic_settings import BaseSettings,SettingsConfigDict
+
+class settings(BaseSettings):
+    APP_NAME: str
+    APP_VERSION:str
+
+    FILE_ALLOWED_TYPES:list
+    FILE_MAX_SIZE:int
+    FILE_DEFAULT_CHUNK_SIZE:int
+
+    MONGO_URL:str
+    MONGODB_DATABASE:str
+
+    GENERATION_BACKEND:str
+    EMBEDDING_BACKEND:str
+
+    OPENAI_KEY:str=None
+    OPENAI_URL:str=None
+    COHERE_KEY:str=None
+    GOOGLE_KEY:str=None
+    
+    GENERATION_MODEL_ID:str=None
+    EMBEDDING_MODEL_ID:str=None
+    EMBEDDING_MODEL_SIZE:int=None
+
+    INPUT_DEFAULT_MAX_CHARACTERS:int=None
+    GENERATION_DEFAULT_MAX_TOKENS:int=None
+    GENERATION_DEFAULT_TEMPERATURE:float=None
+    
+
+    Vectot_DB_BACKEND:str
+    Vectot_DB_PATH:str
+    Vectot_DB_METHOD:str=None
+    
+    DEFAULT_LAN:str="en"
+    PRIMARY_LAN:str
+    
+    #class config: 
+        #env_file=".env"
+    model_config = SettingsConfigDict(env_file=".env")
+    
+def get_settings():
+    return settings()
