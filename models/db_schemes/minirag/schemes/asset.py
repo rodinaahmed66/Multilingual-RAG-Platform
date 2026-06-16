@@ -1,26 +1,30 @@
 import uuid
 from sqlalchemy import Index
-from minirag_base import SQLAlchemyBase
+from .minirag_base import SQLAlchemyBase
 from sqlalchemy.orm import relationship
-from sqlalchemy import column,Integer,DateTime,func,String,ForeignKey
+from sqlalchemy import Column,Integer,DateTime,func,String,ForeignKey
 from sqlalchemy.dialects.postgresql import UUID,JSONB
 
 class Asset(SQLAlchemyBase):
         
         __tablename__="assets"
 
-        asset_id=column(Integer,primery_key=True,autoincrement=True)
-        asset_uuid=column(UUID(as_uuid=True),default=uuid.uuid4,unique=True,nullable=False)
+        asset_id=Column(Integer,primary_key=True,autoincrement=True)
+        asset_uuid=Column(UUID(as_uuid=True),default=uuid.uuid4,unique=True,nullable=False)
         
-        asset_type=column(String,nullable=False)
-        asset_name=column(String,nullable=False)
-        asset_size=column(String,nullable=False)
+        asset_type=Column(String,nullable=False)
+        asset_name=Column(String,nullable=False)
+        asset_size=Column(String,nullable=False)
 
-        asset_config=column(JSONB,nullable=True)
+        asset_config=Column(JSONB,nullable=True)
 
-        asset_project_id=column(Integer,ForeignKey("projects.project_id"),nullable=False)
+        asset_project_id=Column(Integer,ForeignKey("projects.project_id"),nullable=False)
 
         project = relationship("Project", back_populates="assets")
+
+        project = relationship("Project", back_populates="assets")
+        chunks = relationship("DataChunk", back_populates="asset")
+
 
         __table_args__ = (
         Index('ix_asset_project_id', asset_project_id),
