@@ -20,8 +20,9 @@ class Asset(SQLAlchemyBase):
 
         asset_project_id=Column(Integer,ForeignKey("projects.project_id"),nullable=False)
 
-        project = relationship("Project", back_populates="assets")
-
+        creat_at=Column(DateTime(timezone=True),server_default=func.now(),nullable=False)
+        update_at=Column(DateTime(timezone=True),onupdate=func.now(),nullable=False)
+    
         project = relationship("Project", back_populates="assets")
         chunks = relationship("DataChunk", back_populates="asset")
 
