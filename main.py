@@ -3,6 +3,7 @@ from routers import base
 from routers import data
 from routers import nlp
 from fastapi import FastAPI
+from utils.metrics import setup_metrics
 from helper.config import get_settings
 from stores.llm.LLMProviderFactory import LLMProviderFactory
 from stores.llm.templates.template_parser import TemplateParser
@@ -11,6 +12,8 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 
 app = FastAPI()
+
+setup_metrics(app)
 
 #@app.on_event('startup')
 async def startup_span():
