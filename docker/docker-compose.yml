@@ -8,6 +8,7 @@ services:
          - pgvector_data:/var/lib/postgresql/data
       environment:
          - POSTGRES_PASSWORD=PASSWORD
+         - POSTGRES_DB=minirag
       networks:
          - backend
       restart: always 
