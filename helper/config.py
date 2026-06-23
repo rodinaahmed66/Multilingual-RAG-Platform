@@ -31,9 +31,9 @@ class settings(BaseSettings):
     GENERATION_DEFAULT_TEMPERATURE:float=None
     
 
-    Vectot_DB_BACKEND:str
-    Vectot_DB_PATH:str
-    Vectot_DB_METHOD:str=None
+    Vector_DB_BACKEND:str
+    Vector_DB_PATH:str
+    Vector_DB_METHOD:str=None
     
     DEFAULT_LAN:str="en"
     PRIMARY_LAN:str

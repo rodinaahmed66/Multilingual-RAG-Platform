@@ -53,7 +53,7 @@ async def startup_span():
     
     #vector db client
     app.vectordb_client=vectordb_provider_factory.create(
-    provider=settings.Vectot_DB_BACKEND
+    provider=settings.Vector_DB_BACKEND
     )
 
     app.vectordb_client.connect()
