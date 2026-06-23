@@ -35,7 +35,7 @@ GENERATION_DEFAULT_TEMPERATURE=0.1
 
 #-------------------VectotDB config ----------------
 Vector_DB_BACKEND="QDRANT"
-Vector_DB_PATH="qdrant_db"
+Vector_DB_PATH="http://qdrant:6333"
 Vector_DB_METHOD="cosine"
 
 
